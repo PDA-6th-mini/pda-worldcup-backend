@@ -3,11 +3,21 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const cors = require('cors');
 
 const mainRouter = require('./routes/mainRouter');
 
+BigInt.prototype.toJSON = function () {
+  return Number(this);
+};
+
 const app = express();
 
+
+app.use(cors({
+  origin : "http://localhost:3000",
+  credentials: true
+}));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
