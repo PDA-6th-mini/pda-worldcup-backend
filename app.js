@@ -5,14 +5,14 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
 
-const mainRouter = require('./routes/mainRouter');
+const mainRouter = require("./routes/mainRouter");
+const resultRatioRouter = require("./routes/resultRatioRouter");
 
 BigInt.prototype.toJSON = function () {
   return Number(this);
 };
 
 const app = express();
-
 
 app.use(cors({
   origin : "http://localhost:3000",
@@ -26,7 +26,8 @@ app.use(cookieParser());
 /**
  * router 등록
  */
-app.use('/main', mainRouter);
+app.use("/main", mainRouter);
+app.use("/", resultRatioRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -37,7 +38,7 @@ app.use(function (req, res, next) {
 app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.locals.error = req.app.get("env") === "development" ? err : {};
 
   res.status(err.status || 500);
 });
