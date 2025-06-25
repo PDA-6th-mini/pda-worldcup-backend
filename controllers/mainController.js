@@ -1,12 +1,12 @@
 const { successResponse, failResponse } = require("../common/Response");
 const { readSuccess } = require("../common/responseMessages")
-const { getProblems } = require("../services/mainService");
+const mainService = require("../services/mainService");
 
-const board = {
+const main = {
     mainPage: async (req, res) => {
-        const problems = await getProblems();
+        const problems = await mainService.getProblems();
         res.json(successResponse(readSuccess.status, readSuccess.message, problems));
     }
 }
 
-module.exports = board;
+module.exports = main;
