@@ -9,6 +9,7 @@ const mainRouter = require("./routes/mainRouter");
 const resultRatioRouter = require("./routes/resultRatioRouter");
 const gameScreenRouter = require("./routes/gameScreenRouter");
 const problemGenerateRouter = require("./routes/problemGenerateRouter");
+const resultImgRouter = require("./routes/resultImgRouter");
 
 BigInt.prototype.toJSON = function () {
   return Number(this);
@@ -34,6 +35,7 @@ app.use("/main", mainRouter);
 app.use("/", resultRatioRouter);
 app.use("/game", gameScreenRouter);
 app.use("/problems", problemGenerateRouter);
+app.use("/", resultImgRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
