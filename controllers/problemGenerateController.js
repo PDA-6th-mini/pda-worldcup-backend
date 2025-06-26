@@ -19,7 +19,7 @@ const problemGenerateController = {
       await insertImage(
         req.uploadedUrls.map((url) => ({
           problem_id: insertId,
-          img_name: url.name,
+          img_name: url.name.split(".")[0],
           img_url: url.location,
         }))
       );
