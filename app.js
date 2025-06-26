@@ -8,6 +8,7 @@ const cors = require("cors");
 const mainRouter = require("./routes/mainRouter");
 const resultRatioRouter = require("./routes/resultRatioRouter");
 const gameScreenRouter = require("./routes/gameScreenRouter");
+const problemGenerateRouter = require("./routes/problemGenerateRouter");
 
 BigInt.prototype.toJSON = function () {
   return Number(this);
@@ -23,7 +24,7 @@ app.use(
 );
 app.use(logger("dev"));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 /**
@@ -32,6 +33,7 @@ app.use(cookieParser());
 app.use("/main", mainRouter);
 app.use("/", resultRatioRouter);
 app.use("/game", gameScreenRouter);
+app.use("/problems", problemGenerateRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
