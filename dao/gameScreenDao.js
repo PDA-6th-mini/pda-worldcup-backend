@@ -7,9 +7,9 @@ const gameScreenDao = {
   i.img_id,
   i.img_name,
   i.img_url
-FROM problem p
-JOIN img i ON p.problem_id = i.problem_id
-WHERE p.problem_id = 1;
+  FROM problem p
+  JOIN img i ON p.problem_id = i.problem_id
+  WHERE p.problem_id = ?;
 `;
     const rows = await connection.query(query, [problemId]);
     return rows;

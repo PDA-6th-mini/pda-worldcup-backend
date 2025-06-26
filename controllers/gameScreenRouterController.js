@@ -2,6 +2,15 @@ const { getImgs } = require("../services/gameScreenService");
 const { failResponse, successResponse } = require("../common/Response");
 const { readSuccess } = require("../common/responseMessages");
 
+function shuffleArray(array) {
+  // Fisher-Yates shuffle
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
 const gameScreenRouterController = {
   getGameScreen: async (req, res) => {
     const { problemId } = req.params;
@@ -12,11 +21,13 @@ const gameScreenRouterController = {
     }
     try {
       const gameImgs = await getImgs(problemId);
+      const shuffledImgs = shuffleArray(gameImgs);
+
       res.json(
-        successResponse(readSuccess.status, readSuccess.message, gameImgs)
+        successResponse(readSuccess.status, readSuccess.message, shuffledImgs)
       );
     } catch (error) {
-      console.error("Error in resultRatioController:", error);
+      console.error("Error in gameScreenRouterController:", error);
       res.status(500).json(failResponse(500, "Internal Server Error"));
     }
   },
