@@ -16,6 +16,9 @@ BigInt.prototype.toJSON = function () {
 
 const app = express();
 
+app.use(express.json({ limit: '200mb' }));
+app.use(express.urlencoded({ limit: '200mb', extended: true }));
+
 app.use(
   cors({
     origin: "http://localhost:3000",
@@ -30,7 +33,7 @@ app.use(cookieParser());
 /**
  * router 등록
  */
-app.use("/main", mainRouter);
+app.use("/api/main", mainRouter);
 app.use("/", resultRatioRouter);
 app.use("/game", gameScreenRouter);
 app.use("/problems", problemGenerateRouter);
