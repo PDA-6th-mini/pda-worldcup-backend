@@ -23,28 +23,28 @@ const mainService = {
  * @returns Object
  */
 const _parseData = (rows) => {
-    const problemData = {};
+    const problemMap = new Map();
 
-    for (let i = 0; i < rows.length; i++) {
-        const row = rows[i];
-        const problemId = row.problem_id;
+    for (const row of rows) {
+        const problemId = String(row.problem_id);
 
-        if (!problemData[problemId]) {
-            problemData[problemId] = {
+        if (!problemMap.has(problemId)) {
+            problemMap.set(problemId, {
                 problem_id: problemId,
                 name: row.name,
                 description: row.description,
                 images: [],
-            };
+            });
         }
 
-        problemData[problemId].images.push({
+        problemMap.get(problemId).images.push({
             img_id: row.img_id,
             img_url: row.img_url,
         });
     }
 
-    return Object.values(problemData);
+    return Array.from(problemMap.values());
 };
+
 
 module.exports = mainService;
