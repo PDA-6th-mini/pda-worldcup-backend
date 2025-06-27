@@ -10,6 +10,7 @@ const mainService = {
     getProblems: async () => {
         const conn = await pool.getConnection();
         const rows = await selectProblems(conn);
+        conn.release();
         const parsed = _parseData(rows);
 
         return parsed;
