@@ -29,7 +29,7 @@ const s3Storage = multerS3({
 const upload = multer({
   storage: s3Storage,
   limits: {
-    fileSize: 10 * 1024 * 1024, // 10MB 제한
+    fileSize: 50 * 1024 * 1024, // 10MB 제한
   },
   fileFilter: function (req, file, cb) {
     // 이미지 파일만 허용
