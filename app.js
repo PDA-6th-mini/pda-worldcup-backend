@@ -32,7 +32,7 @@ app.use(cookieParser());
 /**
  * router 등록
  */
-app.use("/api/main", mainRouter);
+app.use("/main", mainRouter);
 app.use("/", resultRatioRouter);
 app.use("/game", gameScreenRouter);
 app.use("/problems", problemGenerateRouter);
