@@ -5,24 +5,20 @@ const mainService = require('../services/mainService');
 const main = {
 	mainPage: async (req, res) => {
 		const {
-			cursor_total_count,
-			cursor_count,
-			cursor_img_id,
+			cursor_problem_id,
 		} = req.query;
 
 		// 숫자형으로 파싱
-		const cursor = cursor_total_count
+		const cursor = cursor_problem_id
 			? {
-					cursor_total_count: Number(cursor_total_count),
-					cursor_count: Number(cursor_count),
-					cursor_img_id: Number(cursor_img_id),
-			  }
+				cursor_problem_id: Number(cursor_problem_id),
+			}
 			: null;
 
 
 		const problems = await mainService.getProblems(cursor);
-        console.log(problems)
-        
+		console.log(problems)
+
 		res.json(successResponse(readSuccess.status, readSuccess.message, problems));
 	},
 };
