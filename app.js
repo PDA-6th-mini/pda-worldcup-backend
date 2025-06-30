@@ -1,12 +1,16 @@
-const createError = require('http-errors');
-const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
-const cors = require('cors');
+const createError = require("http-errors");
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
+const cors = require("cors");
 
 const mainRouter = require("./routes/mainRouter");
 const resultRatioRouter = require("./routes/resultRatioRouter");
+const gameScreenRouter = require("./routes/gameScreenRouter");
+const problemGenerateRouter = require("./routes/problemGenerateRouter");
+const resultImgRouter = require("./routes/resultImgRouter");
+const resultSaveRouter = require("./routes/resultSaveRouter");
 
 BigInt.prototype.toJSON = function () {
   return Number(this);
@@ -14,13 +18,15 @@ BigInt.prototype.toJSON = function () {
 
 const app = express();
 
-app.use(cors({
-  origin : "http://localhost:3000",
-  credentials: true
-}));
-app.use(logger('dev'));
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
+app.use(logger("dev"));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 /**
@@ -28,6 +34,10 @@ app.use(cookieParser());
  */
 app.use("/main", mainRouter);
 app.use("/", resultRatioRouter);
+app.use("/game", gameScreenRouter);
+app.use("/problems", problemGenerateRouter);
+app.use("/", resultImgRouter);
+app.use("/", resultSaveRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

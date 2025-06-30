@@ -11,11 +11,14 @@ const resultRatioService = {
       if (rows.length === 0) return null;
 
       const { problem_name } = rows[0]; // 모든 행에서 동일
-      const result = rows.map(({ img_name, cnt, win_ratio_percent }) => ({
-        img_name,
-        cnt,
-        win_ratio_percent,
-      }));
+      const result = rows.map(
+        ({ img_name, cnt, win_ratio_percent, img_url }) => ({
+          img_name,
+          cnt,
+          win_ratio_percent,
+          img_url,
+        })
+      );
 
       return {
         problem_name,

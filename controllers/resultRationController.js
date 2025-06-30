@@ -15,7 +15,6 @@ const resultRatioController = {
 
     try {
       const ratioResult = await getWinnerRatio(problemId);
-      console.log("비율쿼리돌린결과", ratioResult);
       res.json(
         successResponse(readSuccess.status, readSuccess.message, ratioResult)
       );
